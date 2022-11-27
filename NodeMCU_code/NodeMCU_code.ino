@@ -12,10 +12,9 @@
 
 
 
-#define trig_us 6
-#define echo_us1 5
-//#define trig_us D1  // Trigger pin for both ultrasonic sensor.
-//#define echo_us1 D2 // Echo pin for 1st ultrasonic sensor.
+
+#define trig_us D1  // Trigger pin for both ultrasonic sensor.
+#define echo_us1 D2 // Echo pin for 1st ultrasonic sensor.
 #define echo_us2 D3 // Echo pin for 2nd ultrasonic sensor.
 #define motor_pin D7 // D7 or GPIO2 pin for Servo-motor control.
 #define SM_pin A0 // Raindrop sensor digital pin
@@ -35,6 +34,7 @@ float h = 20.0; // Height of Bins
 int runner = 0; // Variable for selecting Segregation & Uploading functions
 int time1 = 0; //for using as time
 BlynkTimer timer;
+
 char auth[] = BLYNK_AUTH_TOKEN;
 const char *ssid = "U2"; // WiFi Name (SSID)
 const char *pswd = "3K888v55"; // WiFi Password
@@ -48,8 +48,8 @@ void setup() {
   Serial.begin(115200); // Serial Monitor baud-rate
   pinMode(trig_us, OUTPUT); 
   pinMode(echo_us1, INPUT); 
-  //pinMode(trig_us, OUTPUT); // making Trigger as output
-  //pinMode(echo_us1, INPUT); // making Echo 1 as input
+  pinMode(trig_us, OUTPUT); // making Trigger as output
+  pinMode(echo_us1, INPUT); // making Echo 1 as input
   pinMode(echo_us2, INPUT); // making Echo 2 as input
   //pinMode(SM_pin, INPUT); // RD sensor pin
   pinMode(IR_pin, INPUT); // IR sensor pin
@@ -102,14 +102,16 @@ void loop() {
 }
 
 void detectWaste() {
-  //IR_value = digitalRead(IR_pin);
- // if(IR_value == 0) {
-  //  Serial.println("No waste");
- // }
-  //else {
+  IR_value = digitalRead(IR_pin);
+  if(IR_value == 1) {
+    Serial.println("ir value");
+    Serial.println(IR_value);
+    Serial.println("No waste");
+  }
+  else {
     sensorValue=analogRead(A0);
     RD_value = digitalRead(SM_pin);
-    if(sensorValue <= 1024 && sensorValue >=800) {
+    if(sensorValue <= 1024 && sensorValue >=965) {
       Serial.println("Dry Waste detected.");
       detected_dry();
     }
@@ -117,7 +119,7 @@ void detectWaste() {
       Serial.println("Wet Waste detected.");
       detected_wet();
     }
- // }
+  }
 }
 
 void detected_wet() {
