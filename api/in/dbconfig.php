@@ -1,6 +1,6 @@
 <?php
-    $DB_SERVER = "SERVER-ADDRESS";
-    $DB_USER = "DATABASE-USERNAME";
-    $DB_PASSWORD = "DATABASE-PASSWORD"
-    $DB_DATABASE = "DATABAS-HOST";
+    $DB_SERVER = "localhost";
+    $DB_USER = "root";
+    $DB_PASSWORD = "";
+    $DB_DATABASE = "wasteMan";
 ?>
