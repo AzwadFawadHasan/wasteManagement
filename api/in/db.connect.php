@@ -2,7 +2,7 @@
 
 class DB_CONNECT {
     function __construct() { // constructor
-        &this->connect(); // trying to connect database
+        $this->connect(); // trying to connect database
     }
     function __destruct() { // destructor
         $this->close(); // closing connection to database
