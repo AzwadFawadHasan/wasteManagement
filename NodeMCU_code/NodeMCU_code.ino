@@ -107,16 +107,20 @@ void detectWaste() {
     Serial.println("ir value");
     Serial.println(IR_value);
     Serial.println("No waste");
+    
   }
   else {
     sensorValue=analogRead(A0);
     RD_value = digitalRead(SM_pin);
-    if(sensorValue <= 1024 && sensorValue >=965) {
+    Blynk.logEvent("wastegiven");
+    if(sensorValue <= 1024 && sensorValue >=990) {
       Serial.println("Dry Waste detected.");
+      Blynk.logEvent("drywaste");
       detected_dry();
     }
     else {
       Serial.println("Wet Waste detected.");
+      Blynk.logEvent("wetwaste");
       detected_wet();
     }
   }
